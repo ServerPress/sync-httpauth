@@ -4,7 +4,7 @@ Plugin Name: WPSiteSync for HTTP Authentication
 Plugin URI: http://wpsitesync.com
 Description: Adds support for sites protected with HTTP Authentication via .htaccess rules.
 Author: WPSiteSync
-Author URI: http://wpsitesync.com
+Author URI: http://serverpress.com
 Version: 1.0
 Text Domain: wpsitesync-httpauth
 
