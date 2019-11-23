@@ -3,7 +3,7 @@ Contributors: serverpress, spectromtech, davejesch, Steveorevo
 Donate link: http://serverpress.com
 Tags: wpsitesync, content, synchronization, content sync, data migration, desktopserver, http authentication
 Requires at least: 3.5
-Tested up to: 4.7.3
+Tested up to: 5.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
