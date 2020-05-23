@@ -22,6 +22,8 @@ class WPSiteSync_HTTPAuth
 	private function __construct()
 	{
 		add_action('spectrom_sync_init', array($this, 'init'));
+		if (is_admin())
+			add_action('wp_loaded', array($this, 'wp_loaded'));
 	}
 
 	/**
@@ -45,6 +47,51 @@ class WPSiteSync_HTTPAuth
 			new SyncHTTPAuthAdmin();
 		}
 		add_filter('spectrom_sync_api_arguments', array($this, 'filter_api_args'), 10, 2);
+	}
+
+	/**
+	 * Called when WP is loaded so we can check if parent plugin is active.
+	 */
+	public function wp_loaded()
+	{
+		if (is_admin() && !class_exists('WPSiteSyncContent', FALSE) && current_user_can('activate_plugins')) {
+			add_action('admin_notices', array($this, 'notice_requires_wpss'));
+			add_action('admin_init', array($this, 'disable_plugin'));
+		}
+	}
+
+	/**
+	 * Displays the warning message stating that WPSiteSync is not present.
+	 */
+	public function notice_requires_wpss()
+	{
+		$install = admin_url('plugin-install.php?tab=search&s=wpsitesync');
+		$activate = admin_url('plugins.php');
+		$msg = sprintf(__('The <em>WPSiteSync for HTTP Authentication</em> plugin requires the main <em>WPSiteSync for Content</em> plugin to be installed and activated. Please %1$sclick here</a> to install or %2$sclick here</a> to activate.', 'wpsitesync-httpauth'),
+					'<a href="' . $install . '">',
+					'<a href="' . $activate . '">');
+		$this->_show_notice($msg, 'notice-warning');
+	}
+
+	/**
+	 * Helper method to display notices
+	 * @param string $msg Message to display within notice
+	 * @param string $class The CSS class used on the <div> wrapping the notice
+	 * @param boolean $dismissable TRUE if message is to be dismissable; otherwise FALSE.
+	 */
+	private function _show_notice($msg, $class = 'notice-success', $dismissable = FALSE)
+	{
+		echo '<div class="notice ', $class, ' ', ($dismissable ? 'is-dismissible' : ''), '">';
+		echo '<p>', $msg, '</p>';
+		echo '</div>';
+	}
+
+	/**
+	 * Disables the plugin if WPSiteSync not installed
+	 */
+	public function disable_plugin()
+	{
+		deactivate_plugins(plugin_basename(__FILE__));
 	}
 
 	/**
