@@ -55,6 +55,10 @@ or, you can upload the files directly to your server.
 1. Plugin page.
 
 == Changelog ==
+= 1.1 - Jun 11, 2020 =
+* enhancement: Update .htaccess rules for Apache 2.4.
+* enhancement: Check for minimum WPSiteSync version and disable plugin if WPSiteSync not found or not minium version.
+
 = 1.0.0 - May 4, 2017 =
 Initial release to WordPress repository.
 

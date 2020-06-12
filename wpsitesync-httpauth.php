@@ -5,7 +5,7 @@ Plugin URI: http://wpsitesync.com
 Description: Adds support for sites protected with HTTP Authentication via .htaccess rules.
 Author: WPSiteSync
 Author URI: http://serverpress.com
-Version: 1.0
+Version: 1.1
 Text Domain: wpsitesync-httpauth
 
 The PHP code portions are distributed under the GPL license. If not otherwise stated, all
